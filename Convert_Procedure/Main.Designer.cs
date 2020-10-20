@@ -36,7 +36,8 @@
             this.txtInput = new System.Windows.Forms.TextBox();
             this.txtTableName = new System.Windows.Forms.TextBox();
             this.btnConvert = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btn_Insert = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -107,25 +108,37 @@
             this.btnConvert.Name = "btnConvert";
             this.btnConvert.Size = new System.Drawing.Size(125, 71);
             this.btnConvert.TabIndex = 8;
-            this.btnConvert.Text = "Convert";
+            this.btnConvert.Text = "Convert Update";
             this.btnConvert.UseVisualStyleBackColor = true;
             this.btnConvert.Click += new System.EventHandler(this.btnConvert_Click);
             // 
-            // button2
+            // btn_Insert
             // 
-            this.button2.Location = new System.Drawing.Point(757, 241);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(125, 71);
-            this.button2.TabIndex = 9;
-            this.button2.Text = "Exit";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btn_Insert.Location = new System.Drawing.Point(39, 337);
+            this.btn_Insert.Name = "btn_Insert";
+            this.btn_Insert.Size = new System.Drawing.Size(125, 71);
+            this.btn_Insert.TabIndex = 9;
+            this.btn_Insert.Text = "InsertTable";
+            this.btn_Insert.UseVisualStyleBackColor = true;
+            this.btn_Insert.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(756, 241);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(125, 71);
+            this.button1.TabIndex = 10;
+            this.button1.Text = "Exit";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1014, 450);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btn_Insert);
             this.Controls.Add(this.btnConvert);
             this.Controls.Add(this.txtTableName);
             this.Controls.Add(this.txtInput);
@@ -151,7 +164,8 @@
         private System.Windows.Forms.TextBox txtInput;
         private System.Windows.Forms.TextBox txtTableName;
         private System.Windows.Forms.Button btnConvert;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btn_Insert;
+        private System.Windows.Forms.Button button1;
     }
 }
 

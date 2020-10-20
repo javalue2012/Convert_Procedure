@@ -1,0 +1,38 @@
+CREATE PROCEDURE [].[_Update_]
+@Id uniqueidentifier  ,
+@CreatedDate datetime2(7)  ,
+@ChangedDate datetime2(7) ,
+@DeletedDate datetime2(7) ,
+@ClassRunId uniqueidentifier  ,
+@IsDeleted bit  ,
+@ExternalId nvarchar(max) ,
+@ChangedBy uniqueidentifier ,
+@CreatedBy uniqueidentifier  ,
+@EndDateTime datetime2(7) ,
+@SessionTitle nvarchar(max) ,
+@StartDateTime datetime2(7) ,
+@RescheduleEndDateTime datetime2(7) ,
+@RescheduleStartDateTime datetime2(7) ,
+@Venue nvarchar(max) ,
+@SessionCode nvarchar(25) ,
+ AS 
+ UPDATE [].[_] SET
+Id uniqueidentifier    =  @Id uniqueidentifier  ,
+CreatedDate datetime2(7)    =  @CreatedDate datetime2(7)  ,
+ChangedDate datetime2(7)   =  @ChangedDate datetime2(7) ,
+DeletedDate datetime2(7)   =  @DeletedDate datetime2(7) ,
+ClassRunId uniqueidentifier    =  @ClassRunId uniqueidentifier  ,
+IsDeleted bit    =  @IsDeleted bit  ,
+ExternalId nvarchar(max)   =  @ExternalId nvarchar(max) ,
+ChangedBy uniqueidentifier   =  @ChangedBy uniqueidentifier ,
+CreatedBy uniqueidentifier    =  @CreatedBy uniqueidentifier  ,
+EndDateTime datetime2(7)   =  @EndDateTime datetime2(7) ,
+SessionTitle nvarchar(max)   =  @SessionTitle nvarchar(max) ,
+StartDateTime datetime2(7)   =  @StartDateTime datetime2(7) ,
+RescheduleEndDateTime datetime2(7)   =  @RescheduleEndDateTime datetime2(7) ,
+RescheduleStartDateTime datetime2(7)   =  @RescheduleStartDateTime datetime2(7) ,
+Venue nvarchar(max)   =  @Venue nvarchar(max) ,
+SessionCode nvarchar(25)   =  @SessionCode nvarchar(25) ,
+  = 
+ WHERE Id uniqueidentifier   = @Id uniqueidentifier   
+ GO
