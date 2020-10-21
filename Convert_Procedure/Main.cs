@@ -51,39 +51,64 @@ namespace Convert_Procedure
             var listColumns = inputValue.Split(',');
             var listParameter = new List<string>();
             var listParameter2 = new List<string>();
+            var listColumnSet = new List<string>();
             foreach (var column in listColumns)
             {
                 var columns = column.Replace("[", "").Replace("]", "").Replace("NULL", "").Replace("NOT", "").Replace("\t", "").Replace("\r", "").Replace("\n", "");
                 listParameter.Add(columns);
             }
+            listParameter.RemoveAt(listParameter.Count - 1);
+
 
             foreach (var parameter in listParameter)
             {
-                procedure += $"\n@{parameter},";
+                procedure += $"\n    @{parameter},";
             }
             procedure = procedure.Remove(procedure.Length - 2);
-            procedure += $" AS \n UPDATE [{type}].[{moduleName}_{tableName}] SET";
+            procedure += $" \nAS \nUPDATE [{type}].[{moduleName}_{tableName}] SET";
 
-            foreach (var replateDate in listParameter)
+            foreach (var parameter in listParameter)
             {
-                var rep = replateDate.Replace(",", "").Replace("nvarchar(25)", "").Replace("uniqueidentifier", "").Replace("datetime2(7)", "").Replace("bit", "").Replace("nvarchar(max)", "").Replace("NULL", "").Replace("NOT", "");
-                listParameter2.Add(rep);
+                var firstSpaceIndex = parameter.IndexOf(" ");
+                var columnName = parameter.Substring(0, firstSpaceIndex);
+                listColumnSet.Add(columnName);
+            }
+           
+            foreach (var Column in listColumnSet)
+            {
+                procedure += $"\n    [{Column}]  =  @{Column},";
             }
 
-            foreach (var Column in listParameter2 )
+            procedure = procedure.Remove(procedure.Length - 1);
+            procedure += $"\nWHERE [{listColumnSet[0]}] = @{listColumnSet[0]} \nGO";
+
+            string executeQuery = $"EXEC  [{type}].[{moduleName}_Update_{tableName}]";
+            for (int i = 0; i < listParameter.Count; i++)
             {
-                procedure += $"\n{Column}  =  @{Column},";
+                executeQuery += $" ?,";
             }
 
-           procedure = procedure.Remove(procedure.Length - 10);
-            procedure += $"\n WHERE {listParameter2[0]} = @{listParameter2[0]} \n GO";
+            executeQuery = executeQuery.Remove(executeQuery.Length - 1);
+            procedure += $"\n\n {executeQuery}";
 
-            FileStream fParameter = new FileStream(dirParameter, FileMode.Create, FileAccess.Write);
-            StreamWriter m_WriterParameter = new StreamWriter(fParameter);
-            m_WriterParameter.BaseStream.Seek(0, SeekOrigin.End);
-            m_WriterParameter.Write(procedure);
-            m_WriterParameter.Flush();
-            m_WriterParameter.Close();
+            if (rdbOutputFile.Checked == true)
+            {
+
+                FileStream fParameter = new FileStream(dirParameter, FileMode.Create, FileAccess.Write);
+                StreamWriter m_WriterParameter = new StreamWriter(fParameter);
+                m_WriterParameter.BaseStream.Seek(0, SeekOrigin.End);
+                m_WriterParameter.Write(procedure);
+                m_WriterParameter.Flush();
+                m_WriterParameter.Close();
+            }
+            
+            else if(rdbOutputText.Checked == true)
+            {
+                txtOutput.Text = procedure.ToString();
+            }
+        
+
+           
         }
 
         private void button2_Click(object sender, EventArgs e)
